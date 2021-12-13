@@ -1,0 +1,8 @@
+{% include 'base.html' %}
+
+{% block body %}
+    {% for user in users %}
+        <h4>{{user.email}}</h4>
+        <h4>{{user.password}}</h4>
+    {% endfor %}
+{% endblock body %}

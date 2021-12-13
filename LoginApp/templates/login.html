@@ -1,0 +1,15 @@
+{% include 'base.html' %}
+
+{% block body %}
+
+{% if error %}
+    <h1>{{ error }}</h1>
+{% endif %}
+
+<h1>Login form</h1>
+<form method="post">
+    <input type="email" name="email" id="email" placeholder="Enter your email">
+    <input type="password" name="password" id="password" placeholder="Enter your Password">
+    <input type="submit" value="Login">
+</form>
+{% endblock body %}
