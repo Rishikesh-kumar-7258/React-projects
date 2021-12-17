@@ -1,9 +1,10 @@
-from os import error
 from flask import Flask , render_template, request
 from werkzeug.utils import redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -13,15 +14,19 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), unique=False, nullable=False)
+    token = False
 
-@app.route("/")
+@app.route("/", methods=(['GET', 'POST']))
 def index():
+    if request.method == 'POST':
+        isloggedin = request.json['isLoggedin']
+        return ({'isloggedin' : isloggedin})
 
-    return render_template("index.html")
+    return render_template("login.html")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    # print(request.data)
+
     if request.method == "POST":
 
         data = request.form
