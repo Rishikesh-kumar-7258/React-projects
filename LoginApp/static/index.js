@@ -1,5 +1,3 @@
-const axion = require('axion');
-
 console.log("This is very good authentication");
 
 var isLoggedin = false;
@@ -15,8 +13,16 @@ if (first_time)
     const data = {
         'isLoggedin' : isLoggedin
     }
-    axion.post("http://localhost:5000/", data)
-    .then(res => console.log(res.json()))
+    
+    fetch("http://localhost:5000/",{
+        'method' : 'POST',
+        'headers' : {
+            'Content-type' : 'application/json',
+        },
+        'body' : JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
 
     first_time = !first_time;
 }

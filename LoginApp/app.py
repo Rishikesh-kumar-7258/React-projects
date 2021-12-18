@@ -20,9 +20,16 @@ class User(db.Model):
 def index():
     if request.method == 'POST':
         isloggedin = request.json['isLoggedin']
+
+        if(isloggedin):
+            redirect('/home')
         return ({'isloggedin' : isloggedin})
 
-    return render_template("login.html")
+    return redirect("/login")
+
+@app.route('/home')
+def home():
+    return render_template("index.html")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -54,7 +61,8 @@ def login():
 
         user = User.query.filter_by(email=email).first()
         if user and user.password == password:
-            return redirect("/")
+            redirect("/home")
+            return ({'isloggedin' : True})
         else :
             return render_template("login.html", error="Invalid credentials")
 
