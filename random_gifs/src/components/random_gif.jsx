@@ -1,35 +1,18 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import useGif from '../useGif'
 
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 const Random1 = () => {
 
-    const [gif, setGif] = useState('');
-
-    const getGif = async () => {
-        const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
-        
-        const {data} = await axios.get(url);
-
-        setGif(data.data.images.downsized_large.url);
-
-    }
-    
-    useEffect(() => {
-        
-        getGif();
-    }, []);
-
-    const handleClick = () => {
-        getGif();
-    }
+    const [gif, getGif] = useGif();
 
     return (
-        <div className="container">
-            <h1>Random GIF</h1>
-            <img src={gif} alt="random gif" />
-            <button onClick={handleClick} className="btn btn-primary">Generate next</button>
+        <div className=" w-100">
+            <div className="row">
+                <div className="col-12"><h1>Random GIF</h1></div>
+                <div className="col-12"><img src={gif} alt="random gif" className='my-3'/></div>
+                <div className="col-12"><button onClick={() => getGif()} className="btn btn-primary">Generate next</button></div>
+            </div>
         </div>
     )
 }
