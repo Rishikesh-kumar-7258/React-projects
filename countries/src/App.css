@@ -1,0 +1,27 @@
+/* .own-card{
+    width : 100%;
+    height : 100%;
+    position : absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border : 2px solid black;
+}
+
+.full-cover{
+    transition : transform .5s linear;
+    position: relative;
+    perspective: 1000px;
+}
+.full-cover:hover .will:hover{
+    transform : rotateY(180deg);   
+}
+
+.flip-card{
+    transform : rotateY(-180deg);
+}
+
+.full-cover:hover .flip-card:hover{
+    transform : rotateY(0deg);
+    z-index: 5;
+} */
